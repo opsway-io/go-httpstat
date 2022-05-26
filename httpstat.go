@@ -18,14 +18,14 @@ type Result struct {
 	TCPConnection    time.Duration
 	TLSHandshake     time.Duration
 	ServerProcessing time.Duration
-	contentTransfer  time.Duration
+	ContentTransfer  time.Duration
 
 	// The followings are timeline of request
 	NameLookup    time.Duration
 	Connect       time.Duration
 	Pretransfer   time.Duration
 	StartTransfer time.Duration
-	total         time.Duration
+	Total         time.Duration
 
 	t0 time.Time
 	t1 time.Time
@@ -58,13 +58,13 @@ func (r *Result) durations() map[string]time.Duration {
 		"TCPConnection":    r.TCPConnection,
 		"TLSHandshake":     r.TLSHandshake,
 		"ServerProcessing": r.ServerProcessing,
-		"ContentTransfer":  r.contentTransfer,
+		"ContentTransfer":  r.ContentTransfer,
 
 		"NameLookup":    r.NameLookup,
 		"Connect":       r.Connect,
 		"Pretransfer":   r.Connect,
 		"StartTransfer": r.StartTransfer,
-		"Total":         r.total,
+		"Total":         r.Total,
 	}
 }
 
@@ -83,9 +83,9 @@ func (r Result) Format(s fmt.State, verb rune) {
 			fmt.Fprintf(&buf, "Server processing: %4d ms\n",
 				int(r.ServerProcessing/time.Millisecond))
 
-			if r.total > 0 {
+			if r.Total > 0 {
 				fmt.Fprintf(&buf, "Content transfer:  %4d ms\n\n",
-					int(r.contentTransfer/time.Millisecond))
+					int(r.ContentTransfer/time.Millisecond))
 			} else {
 				fmt.Fprintf(&buf, "Content transfer:  %4s ms\n\n", "-")
 			}
@@ -99,9 +99,9 @@ func (r Result) Format(s fmt.State, verb rune) {
 			fmt.Fprintf(&buf, "Start Transfer: %4d ms\n",
 				int(r.StartTransfer/time.Millisecond))
 
-			if r.total > 0 {
+			if r.Total > 0 {
 				fmt.Fprintf(&buf, "Total:          %4d ms\n",
-					int(r.total/time.Millisecond))
+					int(r.Total/time.Millisecond))
 			} else {
 				fmt.Fprintf(&buf, "Total:          %4s ms\n", "-")
 			}
@@ -123,7 +123,6 @@ func (r Result) Format(s fmt.State, verb rune) {
 		}
 		io.WriteString(s, strings.Join(list, ", "))
 	}
-
 }
 
 // WithHTTPStat is a wrapper of httptrace.WithClientTrace. It records the

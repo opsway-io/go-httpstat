@@ -205,12 +205,12 @@ func TestTotal_Zero(t *testing.T) {
 	result.End(time.Now())
 
 	zero := 0 * time.Millisecond
-	if result.total != zero {
-		t.Fatalf("Total time is %d, want %d", result.total, zero)
+	if result.Total != zero {
+		t.Fatalf("Total time is %d, want %d", result.Total, zero)
 	}
 
-	if result.contentTransfer != zero {
-		t.Fatalf("Total time is %d, want %d", result.contentTransfer, zero)
+	if result.ContentTransfer != zero {
+		t.Fatalf("Total time is %d, want %d", result.ContentTransfer, zero)
 	}
 }
 
@@ -220,13 +220,13 @@ func TestHTTPStat_Formatter(t *testing.T) {
 		TCPConnection:    100 * time.Millisecond,
 		TLSHandshake:     100 * time.Millisecond,
 		ServerProcessing: 100 * time.Millisecond,
-		contentTransfer:  100 * time.Millisecond,
+		ContentTransfer:  100 * time.Millisecond,
 
 		NameLookup:    100 * time.Millisecond,
 		Connect:       100 * time.Millisecond,
 		Pretransfer:   100 * time.Millisecond,
 		StartTransfer: 100 * time.Millisecond,
-		total:         100 * time.Millisecond,
+		Total:         100 * time.Millisecond,
 
 		t5: time.Now(),
 	}

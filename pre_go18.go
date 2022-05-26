@@ -1,3 +1,4 @@
+//go:build !go1.8
 // +build !go1.8
 
 package httpstat
@@ -20,21 +21,21 @@ func (r *Result) End(t time.Time) {
 		return
 	}
 
-	r.contentTransfer = r.t5.Sub(r.t4)
-	r.total = r.t5.Sub(r.t0)
+	r.ContentTransfer = r.t5.Sub(r.t4)
+	r.Total = r.t5.Sub(r.t0)
 }
 
 // ContentTransfer returns the duration of content transfer time.
 // It is from first response byte to the given time. The time must
 // be time after read body (go-httpstat can not detect that time).
-func (r *Result) ContentTransfer(t time.Time) time.Duration {
+func (r *Result) GetContentTransfer(t time.Time) time.Duration {
 	return t.Sub(r.t4)
 }
 
 // Total returns the duration of total http request.
 // It is from dns lookup start time to the given time. The
 // time must be time after read body (go-httpstat can not detect that time).
-func (r *Result) Total(t time.Time) time.Duration {
+func (r *Result) GetTotal(t time.Time) time.Duration {
 	return t.Sub(r.t0)
 }
 
